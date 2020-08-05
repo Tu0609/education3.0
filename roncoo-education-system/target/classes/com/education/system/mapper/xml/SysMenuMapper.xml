@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.education.system.mapper.SysMenuMapper">
+
+    <select id="getMenuList" resultType="com.education.system.bean.SysMenu" parameterType="long" >
+        SELECT menu.* FROM sys_menu menu
+        INNER JOIN sys_menu_role mr ON mr.`menu_id` = menu.`id`
+        WHERE mr.`role_id` IN (SELECT role.id FROM sys_role role INNER JOIN sys_role_user ru ON ru.`role_id` = role.`id` AND ru.`user_id` = ${userID})
+    </select>
+
+
+</mapper>
